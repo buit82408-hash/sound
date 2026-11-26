@@ -26,6 +26,7 @@ jobs:
           gradle-version: 9.2.1
 
       - name: Build
+        working-directory: RealisticSounds
         run: gradle build --stacktrace
 
       - name: Upload jar
@@ -33,12 +34,12 @@ jobs:
         with:
           name: realistic-sounds
           path: |
-            build/libs/*.jar
-            !build/libs/*-sources.jar
+            RealisticSounds/build/libs/*.jar
+            !RealisticSounds/build/libs/*-sources.jar
 
       - name: Release (khi push tag v*)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            build/libs/*.jar
+            RealisticSounds/build/libs/*.jar
